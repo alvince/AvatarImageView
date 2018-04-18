@@ -1,4 +1,4 @@
-package me.alvince.android.avatarimageview;
+package me.alvince.sample.avatarimageview;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

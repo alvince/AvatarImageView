@@ -1,4 +1,4 @@
-package me.alvince.android.avatarimageview;
+package me.alvince.sample.avatarimageview;
 
 import org.junit.Test;
 
