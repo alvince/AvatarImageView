@@ -11,6 +11,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.util.TypedValue;
 
@@ -21,6 +22,13 @@ import android.util.TypedValue;
  */
 class Utils {
     /**
+     * Check if current run on ui thread
+     */
+    public static boolean isCurrUiThread() {
+        return Thread.currentThread() == Looper.getMainLooper().getThread();
+    }
+
+    /**
      * Convert dimens from dip to px.
      */
     public static float fromDip(Context context, float dip) {
@@ -29,13 +37,13 @@ class Utils {
     }
 
     /**
-     * 将Drawable转换成带圆角的将Drawable
+     * 将 Drawable 转换成带圆角的 Drawable
      *
-     * @param drawable 原Drawable对象
-     * @param outWidth 目标宽度
-     * @param outHeight 目标高度
+     * @param drawable    原 Drawable 对象
+     * @param outWidth    目标宽度
+     * @param outHeight   目标高度
      * @param roundCorner 圆角大小
-     * @return Drawable 带圆角的将Drawable
+     * @return Drawable 带圆角的 Drawable
      */
     public static Drawable roundDrawable(@Nullable Drawable drawable, int outWidth, int outHeight, int roundCorner) {
         if (drawable == null) {

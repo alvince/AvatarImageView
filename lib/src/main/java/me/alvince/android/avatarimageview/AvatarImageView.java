@@ -122,7 +122,8 @@ public class AvatarImageView extends ImageView {
                 && mStrokePaint != null && mStrokeRoundRect != null) {
             canvas.drawRoundRect(mStrokeRoundRect, roundCorner, roundCorner, mStrokePaint);
         }
-        if (isPressed() && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+        // draw pressed mask foreground color
+        if (isPressed() && colorPressed != Color.TRANSPARENT && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
             canvas.drawRoundRect(mForegroundRect, roundCorner, roundCorner, mForegroundPaint);
         }
     }
@@ -136,23 +137,44 @@ public class AvatarImageView extends ImageView {
         }
     }
 
+    /**
+     * Setup image round corner
+     *
+     * @param corner round corner in pixel
+     */
     public void setRoundCorner(int corner) {
         roundCorner = Math.max(0, corner);
         setup();
     }
 
+    /**
+     * Setup stroke color
+     *
+     * @param strokeColor stroke color int
+     */
     public void setStrokeColor(@ColorInt int strokeColor) {
         this.strokeColor = strokeColor;
         setup();
     }
 
+    /**
+     * Setup stroke width
+     *
+     * @param width stroke size in pixel
+     */
     public void setStrokeWidth(int width) {
         strokeWidth = Math.max(0, width);
         setup();
     }
 
+    /**
+     * Enable custom drawing image
+     *
+     * @param enable true custom drawing, else platform default
+     */
     public void enableRenderOver(boolean enable) {
         rearrangeImage = enable;
+        postInvalidate();
     }
 
     private Bitmap getBitmap() {
@@ -250,6 +272,11 @@ public class AvatarImageView extends ImageView {
                 mStrokeRoundRect.set(strokeL, strokeT, strokeR, strokeB);
             }
         }
-        invalidate();
+
+        if (Utils.isCurrUiThread()) {
+            invalidate();
+        } else {
+            postInvalidate();
+        }
     }
 }
