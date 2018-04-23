@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="steins_gate">
+        <item>
+            <![CDATA[https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524480057351&di=dd1650ae5bcb3059bd314f361c7ea2f7&imgtype=jpg&src=http%3A%2F%2Fimg3.imgtn.bdimg.com%2Fit%2Fu%3D1397010308%2C46309894%26fm%3D214%26gp%3D0.jpg]]>
+        </item>
+        <item>
+            <![CDATA[https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524480495985&di=013ac7e7f16f4d70ff44ffee855b419e&imgtype=0&src=http%3A%2F%2Fimg3.duitang.com%2Fuploads%2Fitem%2F201505%2F09%2F20150509073905_jfQYA.jpeg]]>
+        </item>
+        <item>
+            <![CDATA[https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524480353219&di=efc5707910c8a17bf179fa4151759807&imgtype=0&src=http%3A%2F%2Fimg1.gtimg.com%2Fcomic%2Fpics%2Fhv1%2F188%2F10%2F2050%2F133303988.jpg]]>
+        </item>
+        <item>
+            <![CDATA[https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524482054576&di=a1ddba58adb96cb165c5a90735d53323&imgtype=0&src=http%3A%2F%2Fi1.qhimg.com%2Fdr%2F270_500_%2Ft0141b45a6ad2d67022.jpg]]>
+        </item>
+        <item>
+            <![CDATA[https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524482108080&di=736bf9ecd658b9d4fe02525e6f8de56d&imgtype=0&src=http%3A%2F%2Fimg5.duitang.com%2Fuploads%2Fitem%2F201403%2F18%2F20140318081437_nTiRM.thumb.700_0.jpeg]]>
+        </item>
+        <item>
+            <![CDATA[https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524482180105&di=c7252b61196df54ec7b0dbbd2cd02972&imgtype=0&src=http%3A%2F%2Ftp.lingyu.me%2Fbz%2Fuploads%2F2016%2F08%2Fwww.lingyu.me_20160801134618358-1024x640.jpg]]>
+        </item>
+        <item>
+            <![CDATA[http://f.hiphotos.baidu.com/zhidao/wh%3D450%2C600/sign=398bc37eccef76093c5e919b1bed8ffa/622762d0f703918f9593fa29563d269758eec497.jpg]]>
+        </item>
+        <item>
+            <![CDATA[http://f.hiphotos.baidu.com/zhidao/pic/item/d439b6003af33a874ced8324c45c10385343b508.jpg]]>
+        </item>
+        <item>
+            <![CDATA[http://img.inside-games.jp/imgs/zoom/356382.jpg]]>
+        </item>
+    </string-array>
+</resources>

@@ -4,16 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="8dp"
     tools:context=".MainActivity">
 
     <me.alvince.android.avatarimageview.AvatarImageView
         android:id="@+id/avatarImageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="parent"
+        android:layout_width="192dp"
+        android:layout_height="192dp"
+        android:scaleType="center"
+        app:img_roundCorner="4dp"
+        app:img_strokeColor="@color/colorPrimary"
+        app:img_strokeWidth="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/avatarImageView" />
 </android.support.constraint.ConstraintLayout>
