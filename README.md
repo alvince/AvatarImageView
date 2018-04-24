@@ -3,6 +3,37 @@ AvatarImageView
 
 A fast roundable and strokeable ImageView for show avatar.
 
+### Usage in xml
+
+```xml
+<me.alvince.android.avatarimageview.AvatarImageView
+        android:id="@+id/avatarImageView"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        app:img_drawImageReplace="true"
+        app:img_foregroundColorPressed="@color/pressed"
+        app:img_roundCorner="4dp"
+        app:img_strokeColor="@color/colorStroke"
+        app:img_strokeWidth="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+```
+
+### Features
+
+- [x] 图片圆角显示  
+- [x] 显示边框
+
+### Attributes
+
+| Xml attr                     | description        | default       |
+| ---------------------------- | ------------------ | ------------- |
+| `img_drawImageReplace`       | 开启自定义显示效果 | `true`        |
+| `img_foregroundColorPressed` | 按下状态前景色     | `TRANSPARENT` |
+| `img_roundCorner`            | 圆角半径           | `5dp`         |
+| `img_strokeColor`            | 边框颜色           | `TRANSPARENT` |
+| `img_strokeWidth`            | 边框宽度           | `2dp`         |
+
 Licence
 ---
 
