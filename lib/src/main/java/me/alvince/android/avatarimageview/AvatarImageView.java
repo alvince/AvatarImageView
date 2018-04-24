@@ -13,6 +13,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
@@ -26,11 +27,13 @@ import android.widget.ImageView;
  * Created by alvince on 2018/1/23.
  *
  * @author alvince.zy@gmail.com
- * @version 1.0, 2018/2/11
+ * @version 1.0, 2018/4/24
  */
 public class AvatarImageView extends ImageView {
 
     private static final String TAG = "AvatarImageView";
+    private static final Bitmap.Config BITMAP_CONFIG = Bitmap.Config.ARGB_8888;
+
     private static final int DEFAULT_STROKE_COLOR = Color.TRANSPARENT;
     private static final int DEFAULT_STROKE_WIDTH = 2;  // with unit dip
     private static final int DEFAULT_CORNER_RADIUS = 5;  // with unit dip
@@ -110,6 +113,18 @@ public class AvatarImageView extends ImageView {
     }
 
     @Override
+    public void setImageResource(int resId) {
+        super.setImageResource(resId);
+        setup();
+    }
+
+    @Override
+    public void setImageURI(@Nullable Uri uri) {
+        super.setImageURI(uri);
+        setup();
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
         // draw image
         if (rearrangeImage && roundCorner > 0 && mImagePaint != null) {
@@ -177,17 +192,34 @@ public class AvatarImageView extends ImageView {
         postInvalidate();
     }
 
+    /**
+     * Setup foreground pressed
+     * <p>
+     * Use {@link #setForeground(Drawable)} instead while above Android-Marshmallow
+     *
+     * @param foreground foreground color pressed
+     */
+    public void setColorPressed(@ColorInt int foreground) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            return;
+        }
+        colorPressed = foreground;
+        postInvalidate();
+    }
+
     private Bitmap getBitmap() {
         Drawable drawable = getDrawable();
 
         if (drawable == null) return null;
 
         if (drawable instanceof BitmapDrawable) {
-            return Bitmap.createBitmap(((BitmapDrawable) drawable).getBitmap());
+            return ((BitmapDrawable) drawable).getBitmap();
         }
 
+        Bitmap bitmap;
         try {
-            Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), BITMAP_CONFIG);
+
             Canvas canvas = new Canvas(bitmap);
             drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
             drawable.draw(canvas);
@@ -201,35 +233,59 @@ public class AvatarImageView extends ImageView {
     private void setup() {
         int w = getWidth();
         int h = getHeight();
-        if (w == 0 && h == 0) return;
+        if (w == 0 && h == 0) {
+            return;
+        }
+
+        Bitmap bitmap = getBitmap();
+        if (bitmap == null) {
+            return;
+        }
 
         // config foreground bound
-        Rect padding = new Rect();
+        Rect paddingRect = new Rect();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
-            padding.set(getPaddingStart(), getPaddingTop(), getPaddingEnd(), getPaddingBottom());
+            paddingRect.set(getPaddingStart(), getPaddingTop(), getPaddingEnd(), getPaddingBottom());
         } else {
-            padding.set(getPaddingLeft(), getPaddingTop(), getPaddingRight(), getPaddingBottom());
+            paddingRect.set(getPaddingLeft(), getPaddingTop(), getPaddingRight(), getPaddingBottom());
         }
-        mForegroundRect.set(padding.left, padding.top, w - padding.right, h - padding.bottom);
+        mForegroundRect.set(paddingRect.left, paddingRect.top, w - paddingRect.right, h - paddingRect.bottom);
 
         if (roundCorner == 0 && (strokeWidth == 0 || strokeColor == Color.TRANSPARENT)) return;
         final float renderOffset = strokeWidth * .5F;
 
+        // config stroke paint & rect
+        if (strokeColor != Color.TRANSPARENT && strokeWidth > 0) {
+            if (mStrokePaint == null) {
+                mStrokePaint = new Paint();
+                mStrokePaint.setAntiAlias(true);
+            }
+            mStrokePaint.setStyle(Paint.Style.STROKE);
+            mStrokePaint.setColor(strokeColor);
+            mStrokePaint.setStrokeWidth(strokeWidth);
+
+            float strokeL, strokeT = strokeL = renderOffset;
+            float strokeR = w - renderOffset;
+            float strokeB = h - renderOffset;
+            if (mStrokeRoundRect == null) {
+                mStrokeRoundRect = new RectF(strokeL, strokeT, strokeR, strokeB);
+            } else {
+                mStrokeRoundRect.set(strokeL, strokeT, strokeR, strokeB);
+            }
+        }
+
         // config image shader
-        Bitmap bitmap = getBitmap();
-        if (rearrangeImage && bitmap != null) {
+        if (rearrangeImage) {
             float bitmapWidth = bitmap.getWidth();
             float bitmapHeight = bitmap.getHeight();
             if (bitmapWidth == 0 || bitmapHeight == 0) return;
 
-            RectF imageRect = new RectF(padding.left + renderOffset, padding.top + renderOffset,
-                    w - padding.right - renderOffset, h - padding.bottom - renderOffset);
-            if (mImageShader == null) {
-                mImageShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-            }
+            RectF imageRect = new RectF(paddingRect.left + renderOffset, paddingRect.top + renderOffset,
+                    w - paddingRect.right - renderOffset, h - paddingRect.bottom - renderOffset);
+            mImageShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
 
-            float availableW = w - padding.left - padding.right - strokeWidth * 2F;
-            float availableH = h - padding.top - padding.bottom - strokeWidth * 2F;
+            float availableW = w - paddingRect.left - paddingRect.right - strokeWidth * 2F;
+            float availableH = h - paddingRect.top - paddingRect.bottom - strokeWidth * 2F;
             float ratioX = availableW / bitmapWidth;
             float ratioY = availableH / bitmapHeight;
             float scale = Math.max(ratioX, ratioY);
@@ -253,24 +309,8 @@ public class AvatarImageView extends ImageView {
             }
         }
 
-        // config stroke paint & rect
-        if (strokeColor != Color.TRANSPARENT && strokeWidth > 0) {
-            if (mStrokePaint == null) {
-                mStrokePaint = new Paint();
-                mStrokePaint.setAntiAlias(true);
-            }
-            mStrokePaint.setStyle(Paint.Style.STROKE);
-            mStrokePaint.setColor(strokeColor);
-            mStrokePaint.setStrokeWidth(strokeWidth);
-
-            float strokeL, strokeT = strokeL = renderOffset;
-            float strokeR = w - renderOffset;
-            float strokeB = h - renderOffset;
-            if (mStrokeRoundRect == null) {
-                mStrokeRoundRect = new RectF(strokeL, strokeT, strokeR, strokeB);
-            } else {
-                mStrokeRoundRect.set(strokeL, strokeT, strokeR, strokeB);
-            }
+        if (getParent() == null) {
+            return;
         }
 
         if (Utils.isCurrUiThread()) {
