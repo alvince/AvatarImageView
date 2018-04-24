@@ -27,7 +27,7 @@ import android.widget.ImageView;
  * Created by alvince on 2018/1/23.
  *
  * @author alvince.zy@gmail.com
- * @version 1.0, 2018/4/24
+ * @version 0.1, 2018/4/24
  */
 public class AvatarImageView extends ImageView {
 

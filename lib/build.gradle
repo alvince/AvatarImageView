@@ -6,8 +6,8 @@ android {
     defaultConfig {
         minSdkVersion 15
         targetSdkVersion 27
-        versionCode 1
-        versionName "1.0"
+        versionCode "${avatar_image_ver_int}" as int
+        versionName "${avatar_image_version}"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
