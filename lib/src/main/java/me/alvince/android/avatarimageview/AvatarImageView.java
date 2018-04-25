@@ -47,6 +47,7 @@ public class AvatarImageView extends ImageView {
     private BitmapShader mImageShader;
 
     private boolean rearrangeImage;
+    private boolean roundAsCircle;
     private int colorPressed;
     private int roundCorner;
     private int strokeColor;
@@ -71,6 +72,7 @@ public class AvatarImageView extends ImageView {
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.AvatarImageView, defStyleAttr, 0);
         rearrangeImage = a.getBoolean(R.styleable.AvatarImageView_img_drawImageReplace, true);
         colorPressed = a.getColor(R.styleable.AvatarImageView_img_foregroundColorPressed, Color.TRANSPARENT);
+        roundAsCircle = a.getBoolean(R.styleable.AvatarImageView_img_roundAsCircle, false);
         roundCorner = a.getDimensionPixelSize(R.styleable.AvatarImageView_img_roundCorner, (int) Utils.fromDip(context, DEFAULT_CORNER_RADIUS));
         strokeColor = a.getColor(R.styleable.AvatarImageView_img_strokeColor, DEFAULT_STROKE_COLOR);
         strokeWidth = a.getDimensionPixelSize(R.styleable.AvatarImageView_img_strokeWidth, (int) Utils.fromDip(context, DEFAULT_STROKE_WIDTH));
