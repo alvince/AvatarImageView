@@ -27,7 +27,7 @@ import android.widget.ImageView;
  * Created by alvince on 2018/1/23.
  *
  * @author alvince.zy@gmail.com
- * @version 0.1, 2018/4/24
+ * @version 1.0, 2018/7/31
  */
 public class AvatarImageView extends ImageView {
 
@@ -47,9 +47,9 @@ public class AvatarImageView extends ImageView {
     private BitmapShader mImageShader;
 
     private boolean rearrangeImage;
-    private boolean roundAsCircle;
+    private boolean roundAsCircle;  // circular display
     private int colorPressed;
-    private int roundCorner;
+    private int roundedCorner;
     private int strokeColor;
     private int strokeWidth;
 
@@ -73,9 +73,11 @@ public class AvatarImageView extends ImageView {
         rearrangeImage = a.getBoolean(R.styleable.AvatarImageView_img_drawImageReplace, true);
         colorPressed = a.getColor(R.styleable.AvatarImageView_img_foregroundColorPressed, Color.TRANSPARENT);
         roundAsCircle = a.getBoolean(R.styleable.AvatarImageView_img_roundAsCircle, false);
-        roundCorner = a.getDimensionPixelSize(R.styleable.AvatarImageView_img_roundCorner, (int) Utils.fromDip(context, DEFAULT_CORNER_RADIUS));
+        roundedCorner = a.getDimensionPixelSize(
+                R.styleable.AvatarImageView_img_roundedCorner, (int) Utils.fromDip(context, DEFAULT_CORNER_RADIUS));
         strokeColor = a.getColor(R.styleable.AvatarImageView_img_strokeColor, DEFAULT_STROKE_COLOR);
-        strokeWidth = a.getDimensionPixelSize(R.styleable.AvatarImageView_img_strokeWidth, (int) Utils.fromDip(context, DEFAULT_STROKE_WIDTH));
+        strokeWidth = a.getDimensionPixelSize(
+                R.styleable.AvatarImageView_img_strokeWidth, (int) Utils.fromDip(context, DEFAULT_STROKE_WIDTH));
         a.recycle();
 
         mForegroundRect = new RectF();
@@ -128,20 +130,28 @@ public class AvatarImageView extends ImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        // draw image
-        if (rearrangeImage && roundCorner > 0 && mImagePaint != null) {
-            canvas.drawRoundRect(mImageShadeRect, roundCorner, roundCorner, mImagePaint);
-        } else {
+        if (!rearrangeImage) {
             super.onDraw(canvas);
-        }
-        // draw stroke rect
-        if (strokeColor != Color.TRANSPARENT && strokeWidth > 0
-                && mStrokePaint != null && mStrokeRoundRect != null) {
-            canvas.drawRoundRect(mStrokeRoundRect, roundCorner, roundCorner, mStrokePaint);
-        }
-        // draw pressed mask foreground color
-        if (isPressed() && colorPressed != Color.TRANSPARENT && Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            canvas.drawRoundRect(mForegroundRect, roundCorner, roundCorner, mForegroundPaint);
+        } else {
+            // draw image
+            if (roundedCorner > 0 && mImagePaint != null) {
+                canvas.drawRoundRect(mImageShadeRect, roundedCorner, roundedCorner, mImagePaint);
+            }
+            int corner = roundedCorner;
+            if (roundAsCircle) {
+                corner += strokeWidth;
+            }
+            // draw stroke rect
+            if (strokeColor != Color.TRANSPARENT && strokeWidth > 0
+                    && mStrokePaint != null && mStrokeRoundRect != null) {
+                canvas.drawRoundRect(mStrokeRoundRect, corner, corner, mStrokePaint);
+            }
+            // draw pressed mask foreground color
+            if (isPressed()
+                    && Build.VERSION.SDK_INT < Build.VERSION_CODES.M
+                    && colorPressed != Color.TRANSPARENT) {
+                canvas.drawRoundRect(mForegroundRect, corner, corner, mForegroundPaint);
+            }
         }
     }
 
@@ -159,8 +169,8 @@ public class AvatarImageView extends ImageView {
      *
      * @param corner round corner in pixel
      */
-    public void setRoundCorner(int corner) {
-        roundCorner = Math.max(0, corner);
+    public void setRoundedCorner(int corner) {
+        roundedCorner = Math.max(0, corner);
         setup();
     }
 
@@ -251,9 +261,13 @@ public class AvatarImageView extends ImageView {
         } else {
             paddingRect.set(getPaddingLeft(), getPaddingTop(), getPaddingRight(), getPaddingBottom());
         }
-        mForegroundRect.set(paddingRect.left, paddingRect.top, w - paddingRect.right, h - paddingRect.bottom);
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            mForegroundRect.set(paddingRect.left, paddingRect.top, w - paddingRect.right, h - paddingRect.bottom);
+        }
 
-        if (roundCorner == 0 && (strokeWidth == 0 || strokeColor == Color.TRANSPARENT)) return;
+        if (roundedCorner == 0 && (strokeWidth == 0 || strokeColor == Color.TRANSPARENT)) {
+            return;
+        }
         final float renderOffset = strokeWidth * .5F;
 
         // config stroke paint & rect
@@ -280,12 +294,17 @@ public class AvatarImageView extends ImageView {
         if (rearrangeImage) {
             float bitmapWidth = bitmap.getWidth();
             float bitmapHeight = bitmap.getHeight();
-            if (bitmapWidth == 0 || bitmapHeight == 0) return;
+            if (bitmapWidth == 0 || bitmapHeight == 0) {
+                return;
+            }
 
             RectF imageRect = new RectF(paddingRect.left + renderOffset, paddingRect.top + renderOffset,
                     w - paddingRect.right - renderOffset, h - paddingRect.bottom - renderOffset);
-            mImageShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+            if (roundAsCircle) {
+                roundedCorner = (int) (Math.max(imageRect.width(), imageRect.height()) / 2F);
+            }
 
+            mImageShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
             float availableW = w - paddingRect.left - paddingRect.right - strokeWidth * 2F;
             float availableH = h - paddingRect.top - paddingRect.bottom - strokeWidth * 2F;
             float ratioX = availableW / bitmapWidth;
