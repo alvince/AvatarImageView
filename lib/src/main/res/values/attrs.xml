@@ -3,7 +3,8 @@
     <declare-styleable name="AvatarImageView">
         <attr name="img_drawImageReplace" format="boolean" />
         <attr name="img_foregroundColorPressed" format="color" />
-        <attr name="img_roundCorner" format="dimension" />
+        <attr name="img_roundAsCircle" format="boolean" />
+        <attr name="img_roundedCorner" format="dimension" />
         <attr name="img_strokeColor" format="color" />
         <attr name="img_strokeWidth" format="dimension" />
     </declare-styleable>
