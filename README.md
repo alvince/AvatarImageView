@@ -21,7 +21,7 @@ and:
 
 ```gradle
 dependencies {
-    implementation 'com.github.alvince:AvatarImageView:1.0'
+    implementation 'com.github.alvince:AvatarImageView:1.0.1'
 }
 ```
 
