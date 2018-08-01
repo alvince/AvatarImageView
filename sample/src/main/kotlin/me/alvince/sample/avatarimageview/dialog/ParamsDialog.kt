@@ -12,12 +12,13 @@ import com.dingmouren.colorpicker.OnColorPickerListener
 import kotlinx.android.synthetic.main.dialog_view_params.*
 import me.alvince.sample.avatarimageview.Params
 import me.alvince.sample.avatarimageview.R
-import me.alvince.sample.avatarimageview.convert2Dp
+import me.alvince.sample.avatarimageview.convert2DpInt
 
 /**
  * Created by alvince on 2018/7/31
  *
  * @author alvince.zy@gmail.com
+ * @version 1.0.1, 2018/8/1
  */
 class ParamsDialog(context: Context, val data: Params, private val listener: (Params) -> Unit)
     : BottomSheetDialog(context) {
@@ -68,8 +69,9 @@ class ParamsDialog(context: Context, val data: Params, private val listener: (Pa
         text_url.text = "URL: ${data.url}"
         check_circular.isChecked = data.roundAsCircle
         check_circular.isEnabled = false
-        edit_corner_radius.setText("${convert2Dp(data.roundedCorner.toFloat()).toInt()}")
-        edit_stroke_width.setText("${convert2Dp(data.strokeWidth.toFloat()).toInt()}")
+        block_color.setBackgroundColor(data.strokeColor)
+        edit_corner_radius.setText("${convert2DpInt(data.roundedCorner.toFloat())}")
+        edit_stroke_width.setText("${convert2DpInt(data.strokeWidth.toFloat())}")
     }
 
     private fun showColorPicker() {

@@ -7,7 +7,7 @@ package me.alvince.sample.avatarimageview
  */
 data class Params(var url: String) {
     var strokeColor: Int = 0
-    var strokeWidth: Int = convertFromDp(2F).toInt()
-    var roundedCorner: Int = convertFromDp(5F).toInt()
+    var strokeWidth: Int = 0
+    var roundedCorner: Int = 0
     var roundAsCircle = false
 }
