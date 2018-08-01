@@ -27,9 +27,17 @@ dependencies {
 
 ### Sample
 
-![demo](art/avatar_demo.png)  
+##### Demo 下载
+<a href='https://play.google.com/store/apps/details?id=me.alvince.sample.avatarimageview&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'>
+    <img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width="240" height="92" />
+</a>
 
-![demo_params](art/avatar_demo_params.png)
+#### ScreenShot
+
+<div>
+    <img src="art/avatar_demo.png" width="324" height="681" />
+    <img src="art/avatar_demo_params.png" width="324" height="681" />
+<div>
 
 ### Usage
 
