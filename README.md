@@ -21,9 +21,15 @@ and:
 
 ```gradle
 dependencies {
-    implementation 'com.github.alvince:AvatarImageView:1.0.1'
+    implementation 'com.github.alvince:AvatarImageView:1.0.2'
 }
 ```
+
+### Sample
+
+![demo](art/avatar_demo.png)  
+
+![demo_params](art/avatar_demo_params.png)
 
 ### Usage
 
