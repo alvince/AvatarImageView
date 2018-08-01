@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">AvatarImageView</string>
-    <string name="steins_gate_poster"><![CDATA[https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524480606800&di=ecf6358ee01048c05fa31914d76e029b&imgtype=0&src=http%3A%2F%2Fi5.qhimg.com%2Ft01ad7d2fcf47bf1411.jpg]]></string>
+    <string name="hint_stroke_width">边框宽度(dp)</string>
+    <string name="hint_corner_radius">圆角尺寸(dp)</string>
+    <string name="label_circular_display">圆形显示</string>
+    <string name="label_stroke_color">边框颜色</string>
+    <string name="steins_gate_poster">
+        <![CDATA[https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1524480606800&di=ecf6358ee01048c05fa31914d76e029b&imgtype=0&src=http%3A%2F%2Fi5.qhimg.com%2Ft01ad7d2fcf47bf1411.jpg]]>
+    </string>
 </resources>
