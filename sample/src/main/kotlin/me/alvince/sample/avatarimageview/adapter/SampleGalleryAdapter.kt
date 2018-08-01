@@ -9,8 +9,8 @@ import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import com.bumptech.glide.Glide
 import me.alvince.android.avatarimageview.AvatarImageView
+import me.alvince.sample.avatarimageview.GlideApp
 import me.alvince.sample.avatarimageview.Params
 import me.alvince.sample.avatarimageview.R
 import me.alvince.sample.avatarimageview.convertFromDp
@@ -74,9 +74,10 @@ class SampleGalleryAdapter(context: Context) : RecyclerView.Adapter<RecyclerView
                 itemView.setStrokeColor(item.strokeColor)
                 itemView.setStrokeWidth(item.strokeWidth)
                 itemView.setRoundedCorner(item.roundedCorner)
-                Glide.with(holder.itemView.context)
+                GlideApp.with(itemView)
                         .load(item.url)
-                        .into(holder.itemView as ImageView)
+                        .override(imageSize.toInt())
+                        .into(itemView as ImageView)
                 holder.itemView.setOnClickListener { listener?.onItemSelected(item, it) }
             }
             else -> Log.d(TAG, dataSource[position].url)
