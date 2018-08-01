@@ -51,6 +51,7 @@
     <android.support.design.widget.TextInputLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         app:layout_minWidth="96dp"
         app:layout_wrapBefore="true">
 
@@ -58,7 +59,7 @@
             android:id="@+id/edit_stroke_width"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="边框宽度(dp)"
+            android:hint="@string/hint_stroke_width"
             android:inputType="number"
             android:textSize="14sp" />
     </android.support.design.widget.TextInputLayout>
@@ -68,14 +69,39 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp"
+        app:layout_alignSelf="flex_end"
         app:layout_minWidth="96dp">
 
         <EditText
             android:id="@+id/edit_corner_radius"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="圆角尺寸(dp)"
+            android:hint="@string/hint_corner_radius"
             android:inputType="number"
             android:textSize="14sp" />
     </android.support.design.widget.TextInputLayout>
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_flexGrow="1"
+        app:layout_wrapBefore="true" />
+
+    <Button
+        android:id="@+id/btn_negative"
+        style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="取消" />
+
+    <Button
+        android:id="@+id/btn_positive"
+        style="@style/Widget.AppCompat.ButtonBar.AlertDialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
+        android:text="确定"
+        app:layout_alignSelf="baseline" />
 </com.google.android.flexbox.FlexboxLayout>
