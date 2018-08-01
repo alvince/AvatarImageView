@@ -27,7 +27,7 @@ import android.widget.ImageView;
  * Created by alvince on 2018/1/23.
  *
  * @author alvince.zy@gmail.com
- * @version 1.0, 2018/7/31
+ * @version 1.0.1, 2018/8/1
  */
 public class AvatarImageView extends ImageView {
 
@@ -136,7 +136,10 @@ public class AvatarImageView extends ImageView {
             // draw image
             if (roundedCorner > 0 && mImagePaint != null) {
                 canvas.drawRoundRect(mImageShadeRect, roundedCorner, roundedCorner, mImagePaint);
+            } else {
+                super.onDraw(canvas);
             }
+
             int corner = roundedCorner;
             if (roundAsCircle) {
                 corner += strokeWidth;
