@@ -70,6 +70,7 @@ class SampleGalleryAdapter(context: Context) : RecyclerView.Adapter<RecyclerView
         when (itemView) {
             is AvatarImageView -> {
                 val item = dataSource[position]
+                itemView.circularDisplay(item.roundAsCircle)
                 itemView.setStrokeColor(item.strokeColor)
                 itemView.setStrokeWidth(item.strokeWidth)
                 itemView.setRoundedCorner(item.roundedCorner)

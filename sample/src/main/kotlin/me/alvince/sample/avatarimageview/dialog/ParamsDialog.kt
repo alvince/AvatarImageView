@@ -46,6 +46,7 @@ class ParamsDialog(context: Context, val data: Params, private val listener: (Pa
         setContentView(R.layout.dialog_view_params)
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT, WindowManager.LayoutParams.WRAP_CONTENT)
 
+        check_circular.setOnCheckedChangeListener { _, isChecked -> circular = isChecked }
         edit_corner_radius.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 if (s == null || s.isEmpty()) {
@@ -96,7 +97,6 @@ class ParamsDialog(context: Context, val data: Params, private val listener: (Pa
         url.setSpan(StyleSpan(Typeface.ITALIC), urlStart, urlEnd, Spannable.SPAN_INCLUSIVE_EXCLUSIVE)
         text_url.text = url
         check_circular.isChecked = circular
-        check_circular.isEnabled = false
         block_color.setBackgroundColor(strokeColor)
         edit_corner_radius.setText("${convert2DpInt(cornerRadius)}")
         edit_stroke_width.setText("${convert2DpInt(strokeWidth)}")
@@ -119,7 +119,11 @@ class ParamsDialog(context: Context, val data: Params, private val listener: (Pa
     }
 
     private fun validate(): Boolean {
-        var changed = false
+        var changed = data.roundAsCircle == circular
+        if (!changed) {
+            data.roundAsCircle = circular
+            changed = true
+        }
         if (data.strokeColor != strokeColor) {
             data.strokeColor = strokeColor
             changed = true

@@ -15,6 +15,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -53,6 +54,8 @@ public class AvatarImageView extends ImageView {
     private int strokeColor;
     private int strokeWidth;
 
+    private Runnable setupTask;
+
     public AvatarImageView(@NonNull Context context) {
         this(context, null);
     }
@@ -84,6 +87,13 @@ public class AvatarImageView extends ImageView {
         mForegroundPaint = new Paint();
         mForegroundPaint.setStyle(Paint.Style.FILL);
         mForegroundPaint.setColor(colorPressed);
+
+        setupTask = new Runnable() {
+            @Override
+            public void run() {
+                setup();
+            }
+        };
     }
 
     @Override
@@ -174,7 +184,7 @@ public class AvatarImageView extends ImageView {
      */
     public void setRoundedCorner(int corner) {
         roundedCorner = Math.max(0, corner);
-        setup();
+        postSetup();
     }
 
     /**
@@ -184,7 +194,7 @@ public class AvatarImageView extends ImageView {
      */
     public void setStrokeColor(@ColorInt int strokeColor) {
         this.strokeColor = strokeColor;
-        setup();
+        postSetup();
     }
 
     /**
@@ -194,7 +204,17 @@ public class AvatarImageView extends ImageView {
      */
     public void setStrokeWidth(int width) {
         strokeWidth = Math.max(0, width);
-        setup();
+        postSetup();
+    }
+
+    /**
+     * Display image as circle
+     *
+     * @param roundAsCircle display round as circle
+     */
+    public void circularDisplay(boolean roundAsCircle) {
+        this.roundAsCircle = roundAsCircle;
+        postSetup();
     }
 
     /**
@@ -243,6 +263,16 @@ public class AvatarImageView extends ImageView {
             e.printStackTrace();
             return null;
         }
+    }
+
+    private void postSetup() {
+        Handler handler = getHandler();
+        if (handler == null) {
+            return;
+        }
+
+        handler.removeCallbacks(setupTask);
+        handler.postDelayed(setupTask, 64L);
     }
 
     private void setup() {
