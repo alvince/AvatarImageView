@@ -1,7 +1,15 @@
 AvatarImageView
 ===
 
-[![](https://jitpack.io/v/alvince/AvatarImageView.svg)](https://jitpack.io/#alvince/AvatarImageView)  
+<a href="https://github.com/alvince/AvatarImageView">
+    <img src="https://img.shields.io/badge/AvatarImageView-1.0.2-green.svg" alt="AvatarImageView" />
+</a>
+<a href="https://opensource.org/licenses/MIT">
+    <img src="https://img.shields.io/badge/License-MIT-red.svg" alt="License" />
+</a>
+<a href="https://jitpack.io/#alvince/AvatarImageView">
+    <img src="https://jitpack.io/v/alvince/AvatarImageView.svg" alt="Jitpack" />
+</a>
 
 A fast roundable and strokeable ImageView for show avatar.
 
@@ -70,7 +78,7 @@ dependencies {
 | `img_strokeColor`            | 边框颜色           | `TRANSPARENT` |
 | `img_strokeWidth`            | 边框宽度           | `2dp`         |
 
-Licence
+License
 ---
 
 ```
