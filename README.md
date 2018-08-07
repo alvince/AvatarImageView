@@ -1,7 +1,7 @@
 
 
 <p align="center">
-  <img src="https://github.com/familqasimov/AvatarImageView/blob/master/Logo/Logotype_h.svg" height="30%" width="30%">
+  <img src="https://github.com/familqasimov/AvatarImageView/blob/master/Logo/Logotype_h.svg" height="60%" width="60%">
 </p>
 
 ===
