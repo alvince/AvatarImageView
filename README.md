@@ -1,5 +1,12 @@
+
+
+<p align="center">
+  <img src="https://github.com/familqasimov/AvatarImageView/blob/master/Logo/Logo.svg" height="30%" width="30%">
+</p>
+
 AvatarImageView
 ===
+
 
 <a href="https://github.com/alvince/AvatarImageView">
     <img src="https://img.shields.io/badge/AvatarImageView-1.0.2-green.svg" alt="AvatarImageView" />
