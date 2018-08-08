@@ -1,5 +1,11 @@
-AvatarImageView
+
+
+<p align="center">
+  <img src="https://github.com/familqasimov/AvatarImageView/blob/master/Logo/Logotype_h.svg" height="60%" width="60%">
+</p>
+
 ===
+
 
 <a href="https://github.com/alvince/AvatarImageView">
     <img src="https://img.shields.io/badge/AvatarImageView-1.0.2-green.svg" alt="AvatarImageView" />
