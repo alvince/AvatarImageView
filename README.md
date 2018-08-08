@@ -1,12 +1,7 @@
-
-
-<p align="center">
-  <img src="https://github.com/familqasimov/AvatarImageView/blob/master/Logo/Logotype_h.svg" height="60%" width="60%">
-</p>
-
+Avatar-Image-View
 ===
 
-
+<p>
 <a href="https://github.com/alvince/AvatarImageView">
     <img src="https://img.shields.io/badge/AvatarImageView-1.0.2-green.svg" alt="AvatarImageView" />
 </a>
@@ -16,8 +11,11 @@
 <a href="https://jitpack.io/#alvince/AvatarImageView">
     <img src="https://jitpack.io/v/alvince/AvatarImageView.svg" alt="Jitpack" />
 </a>
+</p>
 
-A fast roundable and strokeable ImageView for show avatar.
+![](Logo/Logotype_h.svg)
+
+<font style="font-size:1.5em">A fast roundable and strokeable ImageView for show avatar.</font>
 
 ### Gradle
 
