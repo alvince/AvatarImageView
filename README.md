@@ -82,6 +82,11 @@ dependencies {
 | `img_strokeColor`            | 边框颜色           | `TRANSPARENT` |
 | `img_strokeWidth`            | 边框宽度           | `2dp`         |
 
+### Gratitude
+
+Logo provided by [familqasimov](https://github.com/familqasimov)
+
+
 License
 ---
 
