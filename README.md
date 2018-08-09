@@ -3,7 +3,7 @@ Avatar-Image-View
 
 <p>
 <a href="https://github.com/alvince/AvatarImageView">
-    <img src="https://img.shields.io/badge/AvatarImageView-1.0.2-green.svg" alt="AvatarImageView" />
+    <img src="https://img.shields.io/badge/AvatarImageView-1.0.3-green.svg" alt="AvatarImageView" />
 </a>
 <a href="https://opensource.org/licenses/MIT">
     <img src="https://img.shields.io/badge/License-MIT-red.svg" alt="License" />
@@ -33,7 +33,7 @@ and:
 
 ```gradle
 dependencies {
-    implementation 'com.github.alvince:AvatarImageView:1.0.2'
+    implementation 'com.github.alvince:AvatarImageView:1.0.3'
 }
 ```
 
@@ -84,7 +84,7 @@ dependencies {
 
 ### Gratitude
 
-Logo provided by [familqasimov](https://github.com/familqasimov)
+Logo provided by [Famil Qasimov](https://github.com/familqasimov)
 
 
 License
