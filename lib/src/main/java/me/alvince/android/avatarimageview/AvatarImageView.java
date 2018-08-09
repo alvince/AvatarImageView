@@ -16,10 +16,12 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
+import android.os.Looper;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.widget.ImageView;
 
 /**
@@ -28,7 +30,7 @@ import android.widget.ImageView;
  * Created by alvince on 2018/1/23.
  *
  * @author alvince.zy@gmail.com
- * @version 1.0.2, 2018/8/1
+ * @version 1.0.3, 2018/8/8
  */
 public class AvatarImageView extends ImageView {
 
@@ -77,10 +79,10 @@ public class AvatarImageView extends ImageView {
         colorPressed = a.getColor(R.styleable.AvatarImageView_img_foregroundColorPressed, Color.TRANSPARENT);
         roundAsCircle = a.getBoolean(R.styleable.AvatarImageView_img_roundAsCircle, false);
         roundedCorner = a.getDimensionPixelSize(
-                R.styleable.AvatarImageView_img_roundedCorner, (int) Utils.fromDip(context, DEFAULT_CORNER_RADIUS));
+                R.styleable.AvatarImageView_img_roundedCorner, (int) fromDip(DEFAULT_CORNER_RADIUS));
         strokeColor = a.getColor(R.styleable.AvatarImageView_img_strokeColor, DEFAULT_STROKE_COLOR);
         strokeWidth = a.getDimensionPixelSize(
-                R.styleable.AvatarImageView_img_strokeWidth, (int) Utils.fromDip(context, DEFAULT_STROKE_WIDTH));
+                R.styleable.AvatarImageView_img_strokeWidth, (int) fromDip(DEFAULT_STROKE_WIDTH));
         a.recycle();
 
         mForegroundRect = new RectF();
@@ -367,10 +369,18 @@ public class AvatarImageView extends ImageView {
             return;
         }
 
-        if (Utils.isCurrUiThread()) {
+        if (checkMainThread()) {
             invalidate();
         } else {
             postInvalidate();
         }
+    }
+
+    private boolean checkMainThread() {
+        return Thread.currentThread() == Looper.getMainLooper().getThread();
+    }
+
+    private float fromDip(float dip) {
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dip, getResources().getDisplayMetrics());
     }
 }
