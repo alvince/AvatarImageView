@@ -11,6 +11,10 @@ Avatar-Image-View
 <a href="https://jitpack.io/#alvince/AvatarImageView">
     <img src="https://jitpack.io/v/alvince/AvatarImageView.svg" alt="Jitpack" />
 </a>
+<a href="https://github.com/996icu/996.ICU/blob/master/LICENSE">
+    <img src="https://img.shields.io/badge/license-Anti%20996-blue.svg" alt="Anti996" />
+</a>
+<a href="https://996.icu"><img src="https://img.shields.io/badge/link-996.icu-red.svg" alt="996.icu" /></a>
 </p>
 
 ![](Logo/Logotype_h.svg)
